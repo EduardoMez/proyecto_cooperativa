@@ -4,17 +4,39 @@
  */
 package forms;
 
+import Clases.Cuenta;
+import Clases.CuentaDAO;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import javax.swing.JComboBox;
+
 /**
  *
  * @author luisc
  */
 public class PanelPartidas extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelPartidas
-     */
+      LocalDate hoy = LocalDate.now();
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    String fechaFormateada = hoy.format(formato);
+    Date fecha = Date.from(hoy.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+    
+    
     public PanelPartidas() {
         initComponents();
+           ftxtFecha.setText(fechaFormateada);
+           this.cargarCuentas();
+    }
+    
+     private void cargarCuentas() {
+          CuentaDAO dao = new CuentaDAO();
+          cmb_Cuentas.removeAllItems();
+        for (Cuenta c : dao.listarCuentasParaCMB()) {
+            ((JComboBox) cmb_Cuentas).addItem(c);
+        }
     }
 
     /**
@@ -29,6 +51,23 @@ public class PanelPartidas extends javax.swing.JPanel {
         panelTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        panelInputs = new javax.swing.JPanel();
+        lblNumeroAsiento = new javax.swing.JLabel();
+        txtNumeroAsiento = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        ftxtFecha = new javax.swing.JFormattedTextField();
+        lblCantidad = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        cmbTipo = new javax.swing.JComboBox<>();
+        cmb_Cuentas = new javax.swing.JComboBox<>();
+        btnDebe = new javax.swing.JButton();
+        btnHaber = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cmbEstado = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(1270, 100));
@@ -51,12 +90,217 @@ public class PanelPartidas extends javax.swing.JPanel {
         panelTitulo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 270, 5));
 
         add(panelTitulo, java.awt.BorderLayout.NORTH);
+
+        panelInputs.setBackground(new java.awt.Color(255, 255, 255));
+        panelInputs.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 50, 10, 40));
+        panelInputs.setPreferredSize(new java.awt.Dimension(1200, 150));
+        panelInputs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNumeroAsiento.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        lblNumeroAsiento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblNumeroAsiento.setText("N# Asiento");
+        panelInputs.add(lblNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        txtNumeroAsiento.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNumeroAsiento.setPreferredSize(new java.awt.Dimension(100, 28));
+        txtNumeroAsiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroAsientoActionPerformed(evt);
+            }
+        });
+        panelInputs.add(txtNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 64, 22));
+
+        jLabel2.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Fecha");
+        panelInputs.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        try {
+            ftxtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtFecha.setPreferredSize(new java.awt.Dimension(120, 28));
+        ftxtFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftxtFechaActionPerformed(evt);
+            }
+        });
+        panelInputs.add(ftxtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 70, 22));
+
+        lblCantidad.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        lblCantidad.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCantidad.setText("Cantidad");
+        panelInputs.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
+
+        txtCantidad.setPreferredSize(new java.awt.Dimension(100, 28));
+        panelInputs.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 64, 22));
+
+        jLabel3.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Tipo");
+        panelInputs.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
+
+        cmbTipo.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apertura", "Normal", "Cierre" }));
+        cmbTipo.setMinimumSize(new java.awt.Dimension(150, 28));
+        panelInputs.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 150, 28));
+
+        cmb_Cuentas.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        cmb_Cuentas.setPreferredSize(new java.awt.Dimension(250, 28));
+        cmb_Cuentas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmb_CuentasItemStateChanged(evt);
+            }
+        });
+        cmb_Cuentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmb_CuentasMouseClicked(evt);
+            }
+        });
+        cmb_Cuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_CuentasActionPerformed(evt);
+            }
+        });
+        panelInputs.add(cmb_Cuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 190, 24));
+
+        btnDebe.setBackground(new java.awt.Color(99, 156, 84));
+        btnDebe.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnDebe.setForeground(new java.awt.Color(255, 255, 255));
+        btnDebe.setText("Debe");
+        btnDebe.setBorderPainted(false);
+        btnDebe.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnDebe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDebeActionPerformed(evt);
+            }
+        });
+        panelInputs.add(btnDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 72, 25));
+
+        btnHaber.setBackground(new java.awt.Color(99, 156, 84));
+        btnHaber.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnHaber.setForeground(new java.awt.Color(255, 255, 255));
+        btnHaber.setText("Haber");
+        btnHaber.setBorderPainted(false);
+        btnHaber.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnHaber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHaberActionPerformed(evt);
+            }
+        });
+        panelInputs.add(btnHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 72, 25));
+
+        jLabel5.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Cuenta");
+        panelInputs.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        jLabel4.setText("Estado");
+        panelInputs.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, -1, -1));
+
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registrado", "Aprobado", "Anulado" }));
+        panelInputs.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 130, 30));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        panelInputs.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 740, 350));
+
+        add(panelInputs, java.awt.BorderLayout.LINE_START);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtNumeroAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroAsientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroAsientoActionPerformed
+
+    private void ftxtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxtFechaActionPerformed
+
+    private void cmb_CuentasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_CuentasItemStateChanged
+        // TODO add your handling code here:
+    //    this.traersubCuentas();
+    }//GEN-LAST:event_cmb_CuentasItemStateChanged
+
+    private void cmb_CuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmb_CuentasMouseClicked
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_CuentasMouseClicked
+
+    private void cmb_CuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_CuentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_CuentasActionPerformed
+
+    private void btnDebeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDebeActionPerformed
+       /* Partida partida = new Partida();
+        Asiento asiento = new Asiento();
+        Double debe = Double.parseDouble(txtCantidad.getText());
+
+        partida.setDebe(debe);
+        partida.setHaber(0.0);
+        partida.setAsiento(asiento);
+        String cuentaSeleccionada = cmb_Cuentas.getSelectedItem().toString();
+        String[] partes = cuentaSeleccionada.split("-");
+        String codigo = partes[0];
+        partida.setCuenta(cuentaserv.buscarPorCodigo(codigo));
+        listaTemporalPartidas.add(partida);
+
+        this.recalcularTotales();
+        JOptionPane.showMessageDialog(this, "Partida agregada al debe (Temporal)");
+        actualizarTabla();*/
+    }//GEN-LAST:event_btnDebeActionPerformed
+
+    private void btnHaberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHaberActionPerformed
+     /*   Partida partida = new Partida();
+        Asiento asiento = new Asiento();
+        Double haber = Double.parseDouble(txtCantidad.getText());
+        partida.setAsiento(asiento);
+
+        partida.setHaber(haber);
+        partida.setDebe(0.0);
+        String cuentaSeleccionada = cmb_Cuentas.getSelectedItem().toString();
+        String[] partes = cuentaSeleccionada.split("-");
+        String codigo = partes[0];
+        partida.setCuenta(cuentaserv.buscarPorCodigo(codigo));
+        listaTemporalPartidas.add(partida);
+
+        this.recalcularTotales();
+        JOptionPane.showMessageDialog(this, "Partida agregada al haber (Temporal)");
+        actualizarTabla();*/
+    }//GEN-LAST:event_btnHaberActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDebe;
+    private javax.swing.JButton btnHaber;
+    private javax.swing.JComboBox<String> cmbEstado;
+    private javax.swing.JComboBox<String> cmbTipo;
+    private javax.swing.JComboBox<String> cmb_Cuentas;
+    private javax.swing.JFormattedTextField ftxtFecha;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblNumeroAsiento;
+    private javax.swing.JPanel panelInputs;
     private javax.swing.JPanel panelTitulo;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtNumeroAsiento;
     // End of variables declaration//GEN-END:variables
 }

@@ -93,5 +93,10 @@ public class Cuenta {
         this.activa = activa;
     }
     
+    // Dentro de tu clase Cuenta.java
+@Override
+public String toString() {
+    return this.codigo + "-"+this.nombre; // O si prefieres ver el código también: return this.id + " - " + this.nombre;
+}
 
 }

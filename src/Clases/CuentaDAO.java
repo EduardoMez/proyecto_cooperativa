@@ -104,4 +104,27 @@ public class CuentaDAO {
     return lista;
 }
     
+          public List<Cuenta> listarCuentasParaCMB() {
+        List<Cuenta> lista = new ArrayList<>();
+
+        String sql = "SELECT codigo, nombre FROM cuentas ORDER BY codigo";
+
+        try (Connection cn = Conexion.conectar();
+             PreparedStatement ps = cn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Cuenta cuenta = new Cuenta();
+                cuenta.setCodigo(rs.getString("codigo"));
+                cuenta.setNombre(rs.getString("nombre"));
+                lista.add(cuenta);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al listar las cuentas: " + e.getMessage());
+        }
+
+        return lista;
+    }
+    
 }
