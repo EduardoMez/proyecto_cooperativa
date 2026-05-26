@@ -21,9 +21,12 @@ public class frmLogin extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmLogin() {
-          initComponents();
+         initComponents();
+        ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/logoC.png"));
+        Image imagen = icono.getImage();
+        Image imagenEscalada = imagen.getScaledInstance(290, 200, Image.SCALE_SMOOTH);
+        lblLogo.setIcon(new ImageIcon(imagenEscalada));
        setLocationRelativeTo(null);
-      
     }
 
     /**
@@ -35,84 +38,63 @@ public class frmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JTextField();
+        lblUsuario = new javax.swing.JLabel();
         lblContrasenia = new javax.swing.JLabel();
         pswContrasenia = new javax.swing.JPasswordField();
         btnAceptar = new javax.swing.JButton();
-        btnLimpiar = new javax.swing.JButton();
-        lblUsuario = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setType(java.awt.Window.Type.POPUP);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 260, -1));
+
+        lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        lblUsuario.setText("Usuario");
+        jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 76, -1));
+
+        lblContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         lblContrasenia.setText("Contraseña");
+        jPanel1.add(lblContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 96, -1));
 
         pswContrasenia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pswContraseniaActionPerformed(evt);
             }
         });
+        jPanel1.add(pswContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 260, -1));
 
+        btnAceptar.setBackground(new java.awt.Color(59, 116, 231));
+        btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
+        btnAceptar.setBorderPainted(false);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 161, 30));
 
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
-            }
-        });
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitulo.setText("Iniciar Sesión");
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
-        lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblUsuario.setText("Usuario");
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 0, 360, 360));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(73, 73, 73)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(9, 9, 9)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(36, 36, 36)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtUsuario)
-                                .addComponent(pswContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(16, 16, 16)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(74, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(97, 97, 97)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblUsuario)
-                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblContrasenia)
-                        .addComponent(pswContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAceptar)
-                        .addComponent(btnLimpiar))
-                    .addContainerGap(112, Short.MAX_VALUE)))
-        );
+        jPanel2.setBackground(new java.awt.Color(59, 116, 231));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 240, 160));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -138,14 +120,9 @@ public class frmLogin extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this,
                 "Usuario o contraseña incorrectos");
-            btnLimpiar.doClick();
+          
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtUsuario.setText("");
-        pswContrasenia.setText("");
-    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void pswContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswContraseniaActionPerformed
         // TODO add your handling code here:
@@ -188,8 +165,11 @@ public class frmLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblContrasenia;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPasswordField pswContrasenia;
     private javax.swing.JTextField txtUsuario;
