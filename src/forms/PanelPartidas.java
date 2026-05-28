@@ -4,13 +4,23 @@
  */
 package forms;
 
+import Clases.Asiento;
+import Clases.AsientoDAO;
 import Clases.Cuenta;
 import Clases.CuentaDAO;
+import Clases.Partida;
+import Clases.PartidaDAO;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.sql.SQLException;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
 
 /**
  *
@@ -18,24 +28,79 @@ import javax.swing.JComboBox;
  */
 public class PanelPartidas extends javax.swing.JPanel {
 
-      LocalDate hoy = LocalDate.now();
+    LocalDate hoy = LocalDate.now();
     DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     String fechaFormateada = hoy.format(formato);
     Date fecha = Date.from(hoy.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    DefaultTableModel modelo = new DefaultTableModel();
+    List<Partida> listaTemporalPartidas = new ArrayList<>();
 
-    
-    
     public PanelPartidas() {
         initComponents();
-           ftxtFecha.setText(fechaFormateada);
-           this.cargarCuentas();
+        ftxtFecha.setText(fechaFormateada);
+        this.cargarCuentas();
+        this.llenarTabla();
+        this.recalcularTotales();
     }
-    
-     private void cargarCuentas() {
-          CuentaDAO dao = new CuentaDAO();
-          cmb_Cuentas.removeAllItems();
+
+    private void cargarCuentas() {
+        CuentaDAO dao = new CuentaDAO();
+        cmb_Cuentas.removeAllItems();
         for (Cuenta c : dao.listarCuentasParaCMB()) {
             ((JComboBox) cmb_Cuentas).addItem(c);
+        }
+    }
+
+    private void llenarTabla() {
+        modelo = new DefaultTableModel(); // Usamos la variable global
+        modelo.addColumn("Código");
+        modelo.addColumn("Cuenta");
+        modelo.addColumn("Debe");
+        modelo.addColumn("Haber");
+
+        tblCuentas.setModel(modelo); // Nombre correcto del componente
+        tblCuentas.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(250);
+        tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(70);
+        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(70);
+    }
+
+    public void actualizarTabla() {
+        modelo.setRowCount(0); // Limpia la tabla visual
+        for (Partida partida : listaTemporalPartidas) {
+            // Obtenemos los valores. Nota: Asegúrate de que en tu clase Partida 
+            // tengas acceso temporal a estos campos o pasa el objeto Cuenta.
+            modelo.addRow(new Object[]{
+                partida.getCodigoCuentaTemporal(), // Un String que setearemos en el botón
+                partida.getNombreCuentaTemporal(), // Un String que setearemos en el botón
+                partida.getDebe(),
+                partida.getHaber()
+            });
+        }
+    }
+
+    private void recalcularTotales() {
+        double totalDebe = 0.0;
+        double totalHaber = 0.0;
+
+        // Recorremos la lista temporal sumando los montos
+        for (Partida partida : listaTemporalPartidas) {
+            totalDebe += partida.getDebe();
+            totalHaber += partida.getHaber();
+        }
+
+        // Mostramos los totales formateados en las etiquetas correspondientes
+        // %.2f sirve para asegurar que siempre muestre 2 decimales (ej: 100.00)
+        lblDebe.setText(String.format("$ %.2f", totalDebe));
+        lblHaber.setText(String.format("$ %.2f", totalHaber));
+
+        // Opcional: Si quieres validar visualmente que el asiento cuadre (Partida Doble)
+        if (totalDebe == totalHaber && totalDebe > 0) {
+            lblDebe.setForeground(new java.awt.Color(46, 125, 50));  // Verde si cuadra
+            lblHaber.setForeground(new java.awt.Color(46, 125, 50));
+        } else {
+            lblDebe.setForeground(new java.awt.Color(198, 40, 40));   // Rojo si no cuadra
+            lblHaber.setForeground(new java.awt.Color(198, 40, 40));
         }
     }
 
@@ -48,6 +113,7 @@ public class PanelPartidas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         panelTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -67,7 +133,17 @@ public class PanelPartidas extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCuentas = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        txtConcepto = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        lblTotalDebe = new javax.swing.JLabel();
+        lblDebe = new javax.swing.JLabel();
+        lblTotalHaber = new javax.swing.JLabel();
+        lblHaber = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+
+        jTextField1.setText("jTextField1");
 
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(1270, 100));
@@ -202,7 +278,7 @@ public class PanelPartidas extends javax.swing.JPanel {
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registrado", "Aprobado", "Anulado" }));
         panelInputs.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 130, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -213,11 +289,39 @@ public class PanelPartidas extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblCuentas);
 
-        panelInputs.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 740, 350));
+        panelInputs.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 740, 320));
 
-        add(panelInputs, java.awt.BorderLayout.LINE_START);
+        jLabel6.setText("Concepto:");
+        panelInputs.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        panelInputs.add(txtConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 670, -1));
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTotalDebe.setText("Total debe:");
+        jPanel2.add(lblTotalDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, 20));
+
+        lblDebe.setText("DEBE");
+        jPanel2.add(lblDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
+
+        lblTotalHaber.setText("Total haber:");
+        jPanel2.add(lblTotalHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, -1));
+
+        lblHaber.setText("HABER");
+        jPanel2.add(lblHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, -1, -1));
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, -1, -1));
+
+        panelInputs.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 750, 130));
+
+        add(panelInputs, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNumeroAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroAsientoActionPerformed
@@ -230,7 +334,7 @@ public class PanelPartidas extends javax.swing.JPanel {
 
     private void cmb_CuentasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_CuentasItemStateChanged
         // TODO add your handling code here:
-    //    this.traersubCuentas();
+        //    this.traersubCuentas();
     }//GEN-LAST:event_cmb_CuentasItemStateChanged
 
     private void cmb_CuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmb_CuentasMouseClicked
@@ -243,46 +347,205 @@ public class PanelPartidas extends javax.swing.JPanel {
     }//GEN-LAST:event_cmb_CuentasActionPerformed
 
     private void btnDebeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDebeActionPerformed
-       /* Partida partida = new Partida();
-        Asiento asiento = new Asiento();
-        Double debe = Double.parseDouble(txtCantidad.getText());
+      try {
+        // 1. Validar que el campo cantidad no esté vacío
+        if (txtCantidad.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese una cantidad.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
+        // 2. Recuperar el objeto Cuenta seleccionado directamente del ComboBox
+        Object seleccionado = cmb_Cuentas.getSelectedItem();
+        if (seleccionado == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una cuenta contable.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Cuenta cuentaSeleccionada = (Cuenta) seleccionado;
+
+        // 3. Crear la partida y asignarle los valores correspondientes
+        Partida partida = new Partida();
+        Double debe = Double.parseDouble(txtCantidad.getText().trim());
+
+        // Asignamos el ID numérico real de la BD que ahora sí viene lleno desde el combo
+        partida.setCuenta_id(cuentaSeleccionada.getId()); 
         partida.setDebe(debe);
         partida.setHaber(0.0);
-        partida.setAsiento(asiento);
-        String cuentaSeleccionada = cmb_Cuentas.getSelectedItem().toString();
-        String[] partes = cuentaSeleccionada.split("-");
-        String codigo = partes[0];
-        partida.setCuenta(cuentaserv.buscarPorCodigo(codigo));
-        listaTemporalPartidas.add(partida);
 
-        this.recalcularTotales();
-        JOptionPane.showMessageDialog(this, "Partida agregada al debe (Temporal)");
-        actualizarTabla();*/
+        // Seteamos las variables de texto temporales (Son las que leerá el Modelo de tu JTable)
+        partida.setCodigoCuentaTemporal(cuentaSeleccionada.getCodigo());
+        partida.setNombreCuentaTemporal(cuentaSeleccionada.getNombre());
+
+        // 4. Guardar en la lista en memoria y actualizar la interfaz gráfica
+        listaTemporalPartidas.add(partida); 
+
+        actualizarTabla();        // Refresca las filas del JTable (utilizando los campos temporales)
+        recalcularTotales();      // Ejecuta la lógica de sumas al Debe y Haber en la parte inferior
+        txtCantidad.setText("");  // Limpia el campo para una nueva entrada
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un valor numérico válido en la cantidad.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al agregar partida al Debe: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_btnDebeActionPerformed
 
     private void btnHaberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHaberActionPerformed
-     /*   Partida partida = new Partida();
-        Asiento asiento = new Asiento();
-        Double haber = Double.parseDouble(txtCantidad.getText());
-        partida.setAsiento(asiento);
+        try {
+            if (txtCantidad.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese una cantidad.");
+                return;
+            }
 
-        partida.setHaber(haber);
-        partida.setDebe(0.0);
-        String cuentaSeleccionada = cmb_Cuentas.getSelectedItem().toString();
-        String[] partes = cuentaSeleccionada.split("-");
-        String codigo = partes[0];
-        partida.setCuenta(cuentaserv.buscarPorCodigo(codigo));
-        listaTemporalPartidas.add(partida);
+            Partida partida = new Partida();
+            Double haber = Double.parseDouble(txtCantidad.getText());
+            AsientoDAO idAsiento = new AsientoDAO();
 
-        this.recalcularTotales();
-        JOptionPane.showMessageDialog(this, "Partida agregada al haber (Temporal)");
-        actualizarTabla();*/
+            Cuenta cuentaSeleccionada = (Cuenta) cmb_Cuentas.getSelectedItem();
+
+            if (cuentaSeleccionada != null) {
+                partida.setAsiento_id(idAsiento.obtenerIdAsiento());
+                partida.setCuenta_id(cuentaSeleccionada.getId());
+                partida.setDebe(0.0);
+                partida.setHaber(haber);
+
+                partida.setCodigoCuentaTemporal(cuentaSeleccionada.getCodigo());
+                partida.setNombreCuentaTemporal(cuentaSeleccionada.getNombre());
+
+                listaTemporalPartidas.add(partida);
+
+                //     this.recalcularTotales();
+                actualizarTabla();
+                txtCantidad.setText("");
+                recalcularTotales();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al agregar partida: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnHaberActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+// 1. Validaciones previas de negocio
+        if (listaTemporalPartidas.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "La lista de partidas está vacía.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (txtNumeroAsiento.getText().trim().isEmpty() || txtConcepto.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor complete el Número de Asiento y el Concepto.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+// --- VALIDACIÓN DE PERIODO CONTABLE ---
+        Clases.PeriodoDAO periodoDAO = new Clases.PeriodoDAO();
+        Clases.Periodo periodoActivo = periodoDAO.obtenerPeriodoActivo();
+
+        if (periodoActivo == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "No se puede guardar el asiento porque no existe ningún Periodo Contable 'Abierto' en el sistema.\nPor favor, configure o abra un periodo primero.",
+                    "Error de Configuración Contable",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; // Detiene la ejecución para no insertar datos huérfanos sin periodo_id
+        }
+// --------------------------------------
+
+// 2. Validar principio de partida doble (cuadrante)
+        double totalDebe = 0.0;
+        double totalHaber = 0.0;
+        for (Partida p : listaTemporalPartidas) {
+            totalDebe += p.getDebe();
+            totalHaber += p.getHaber();
+        }
+
+// Usamos una pequeña tolerancia por cuestiones de precisión decimal de punto flotante
+        if (Math.abs(totalDebe - totalHaber) > 0.001) {
+            javax.swing.JOptionPane.showMessageDialog(this, "El asiento no está cuadrado. El total del DEBE debe ser igual al HABER.", "Error Contable", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+// 3. Proceso de Guardado Transaccional
+        java.sql.Connection con = null;
+        try {
+            con = clases.Conexion.conectar();
+            con.setAutoCommit(false); // DETENEMOS EL AUTO-COMMIT PARA CONTROLAR LA TRANSACCIÓN
+
+            // Instanciamos los DAO pasando la conexión compartida
+            AsientoDAO asientoDAO = new AsientoDAO();
+            PartidaDAO partidaDAO = new PartidaDAO();
+
+            // Creamos el objeto Asiento con los datos de los inputs
+            Asiento asiento = new Asiento();
+            asiento.setNumero(txtNumeroAsiento.getText().trim());
+            asiento.setFecha(fecha); // Variable 'fecha' de tipo Date definida arriba de tu panel
+            asiento.setConcepto(txtConcepto.getText().trim());
+            asiento.setTipo(cmbTipo.getSelectedItem().toString());
+            asiento.setEstado(cmbEstado.getSelectedItem().toString());
+
+            // ASIGNACIÓN DINÁMICA: Seteamos el ID del periodo que se encuentra activo en la base de datos
+            asiento.setPeriodo_id(periodoActivo.getId());
+
+            // Verificamos si hay una sesión activa para evitar errores de puntero nulo (NullPointerException)
+            if (Clases.Sesion.getUsuarioActual() != null) {
+                asiento.setCreado_por(Clases.Sesion.getUsuarioActual().getId());
+            } else {
+                // Si por alguna razón pruebas el panel sin loguearte antes, asignará el ID 2 por defecto (Contador)
+                asiento.setCreado_por(2);
+            }
+
+            // Guardamos el asiento y obtenemos su ID generado por la BD
+            int idAsientoGenerado = asientoDAO.insertarAsiento(asiento, con);
+
+            // Recorremos la lista temporal e insertamos las partidas vinculadas al ID del asiento
+            for (Partida partida : listaTemporalPartidas) {
+                partida.setAsiento_id(idAsientoGenerado); // Seteamos el ID real foráneo
+                partida.setHaber(partida.getHaber());
+                partida.setDebe(partida.getDebe());
+
+                partidaDAO.insertarPartida(partida, con);
+            }
+
+            // Si todo salió bien hasta aquí sin excepciones, confirmamos los datos en la BD
+            con.commit();
+            javax.swing.JOptionPane.showMessageDialog(this, "Asiento Diario y Partidas guardados exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            // 4. Limpieza de la interfaz gráfica para el próximo asiento
+            listaTemporalPartidas.clear();
+            actualizarTabla();
+            recalcularTotales();
+            txtNumeroAsiento.setText("");
+            txtConcepto.setText("");
+            txtCantidad.setText("");
+
+        } catch (Exception e) {
+            // Si algo falla, revertimos absolutamente todo para no dejar datos corruptos
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (java.sql.SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            javax.swing.JOptionPane.showMessageDialog(this, "Error crítico al guardar en la base de datos: " + e.getMessage(), "Error de Transacción", javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        } finally {
+            // Aseguramos el cierre de la conexión en el bloque finally
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (java.sql.SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDebe;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnHaber;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbTipo;
@@ -293,14 +556,22 @@ public class PanelPartidas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblDebe;
+    private javax.swing.JLabel lblHaber;
     private javax.swing.JLabel lblNumeroAsiento;
+    private javax.swing.JLabel lblTotalDebe;
+    private javax.swing.JLabel lblTotalHaber;
     private javax.swing.JPanel panelInputs;
     private javax.swing.JPanel panelTitulo;
+    private javax.swing.JTable tblCuentas;
     private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtConcepto;
     private javax.swing.JTextField txtNumeroAsiento;
     // End of variables declaration//GEN-END:variables
 }

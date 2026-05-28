@@ -4,6 +4,8 @@
  */
 package Clases;
 
+import java.util.Date;
+
 /**
  *
  * @author aldan
@@ -11,7 +13,7 @@ package Clases;
 public class Asiento {
     
    private String numero;
-   private String fecha;
+ private java.util.Date fecha; // Cambiar de String a Date
    private String concepto;
    private int periodo_id;
    private String tipo;
@@ -22,7 +24,7 @@ public class Asiento {
     public Asiento() {
     }
 
-    public Asiento(String numero, String fecha, String concepto, int periodo_id, String tipo, String estado, int creado_por, String creado_en) {
+    public Asiento(String numero, Date fecha, String concepto, int periodo_id, String tipo, String estado, int creado_por, String creado_en) {
         this.numero = numero;
         this.fecha = fecha;
         this.concepto = concepto;
@@ -33,6 +35,9 @@ public class Asiento {
         this.creado_en = creado_en;
     }
 
+    
+    
+
     public String getNumero() {
         return numero;
     }
@@ -41,13 +46,15 @@ public class Asiento {
         this.numero = numero;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+  
 
     public String getConcepto() {
         return concepto;

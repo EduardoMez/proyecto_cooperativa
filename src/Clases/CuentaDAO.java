@@ -104,27 +104,61 @@ public class CuentaDAO {
     return lista;
 }
     
-          public List<Cuenta> listarCuentasParaCMB() {
-        List<Cuenta> lista = new ArrayList<>();
+public List<Cuenta> listarCuentasParaCMB() {
+    List<Cuenta> lista = new ArrayList<>();
 
-        String sql = "SELECT codigo, nombre FROM cuentas ORDER BY codigo";
+    // CORRECCIÓN: Agregamos el campo 'id' a la selección
+    String sql = "SELECT id, codigo, nombre FROM cuentas ORDER BY codigo";
 
-        try (Connection cn = Conexion.conectar();
-             PreparedStatement ps = cn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+    try (Connection cn = Conexion.conectar();
+         PreparedStatement ps = cn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
 
-            while (rs.next()) {
-                Cuenta cuenta = new Cuenta();
-                cuenta.setCodigo(rs.getString("codigo"));
-                cuenta.setNombre(rs.getString("nombre"));
-                lista.add(cuenta);
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error al listar las cuentas: " + e.getMessage());
+        while (rs.next()) {
+            Cuenta cuenta = new Cuenta();
+            // CORRECCIÓN: Capturamos el ID de la base de datos
+            cuenta.setId(rs.getInt("id")); 
+            cuenta.setCodigo(rs.getString("codigo"));
+            cuenta.setNombre(rs.getString("nombre"));
+            lista.add(cuenta);
         }
 
-        return lista;
+    } catch (Exception e) {
+        System.out.println("Error al listar las cuentas: " + e.getMessage());
     }
+
+    return lista;
+}
+          
+          public Cuenta buscarPorCodigo(String codigo) {
+    String sql = """
+        SELECT c.id
+        FROM cuentas c
+        WHERE c.codigo = ?
+    """;
+
+    try (
+        Connection con = Conexion.conectar();
+        java.sql.PreparedStatement ps = con.prepareStatement(sql)
+    ) {
+        // CORRECCIÓN: Le pasamos la variable 'codigo' que viene por parámetro
+        ps.setString(1, codigo); 
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                Cuenta cuentaid = new Cuenta();
+                // Leemos el id de la columna seleccionada
+                cuentaid.setId(rs.getInt("id")); 
+                return cuentaid;
+            }
+        }
+
+    } catch (Exception e) {
+        System.out.println("Error al buscar cuenta por código: " + e.getMessage());
+        e.printStackTrace();
+    }
+
+    return null; // Retorna null si no encuentra ninguna cuenta con ese código
+}
     
 }

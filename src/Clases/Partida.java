@@ -10,17 +10,23 @@ private int asiento_id;
 private int cuenta_id;
 private double debe;
 private double haber;
+String codigoCuentaTemporal;
+String nombreCuentaTemporal;
 
         public Partida() {
         }
 
-    public Partida(int id, int asiento_id, int cuenta_id, double debe, double haber) {
+    public Partida(int id, int asiento_id, int cuenta_id, double debe, double haber, String codigoCuentaTemporal, String nombreCuentaTemporal) {
         this.id = id;
         this.asiento_id = asiento_id;
         this.cuenta_id = cuenta_id;
         this.debe = debe;
         this.haber = haber;
+        this.codigoCuentaTemporal = codigoCuentaTemporal;
+        this.nombreCuentaTemporal = nombreCuentaTemporal;
     }
+    
+    
 
     public int getId() {
         return id;
@@ -60,6 +66,22 @@ private double haber;
 
     public void setHaber(double haber) {
         this.haber = haber;
+    }
+
+    public String getCodigoCuentaTemporal() {
+        return codigoCuentaTemporal;
+    }
+
+    public void setCodigoCuentaTemporal(String codigoCuentaTemporal) {
+        this.codigoCuentaTemporal = codigoCuentaTemporal;
+    }
+
+    public String getNombreCuentaTemporal() {
+        return nombreCuentaTemporal;
+    }
+
+    public void setNombreCuentaTemporal(String nombreCuentaTemporal) {
+        this.nombreCuentaTemporal = nombreCuentaTemporal;
     }
     
         
