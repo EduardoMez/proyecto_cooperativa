@@ -40,6 +40,7 @@ public class PanelPartidas extends javax.swing.JPanel {
         ftxtFecha.setText(fechaFormateada);
         this.cargarCuentas();
         this.llenarTabla();
+         estiloTabla(); 
         this.recalcularTotales();
     }
 
@@ -63,6 +64,9 @@ public class PanelPartidas extends javax.swing.JPanel {
         tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(250);
         tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(70);
         tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(70);
+        
+        tblCuentas.getTableHeader().setFont(
+    new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
     }
 
     public void actualizarTabla() {
@@ -132,16 +136,16 @@ public class PanelPartidas extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblCuentas = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         txtConcepto = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        lblTotalDebe = new javax.swing.JLabel();
-        lblDebe = new javax.swing.JLabel();
-        lblTotalHaber = new javax.swing.JLabel();
-        lblHaber = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCuentas = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
+        lblHaber = new javax.swing.JLabel();
+        lblTotalHaber = new javax.swing.JLabel();
+        lblDebe = new javax.swing.JLabel();
+        lblTotalDebe = new javax.swing.JLabel();
+        btnLimpiar = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -175,7 +179,7 @@ public class PanelPartidas extends javax.swing.JPanel {
         lblNumeroAsiento.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         lblNumeroAsiento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNumeroAsiento.setText("N# Asiento");
-        panelInputs.add(lblNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        panelInputs.add(lblNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
         txtNumeroAsiento.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNumeroAsiento.setPreferredSize(new java.awt.Dimension(100, 28));
@@ -184,12 +188,12 @@ public class PanelPartidas extends javax.swing.JPanel {
                 txtNumeroAsientoActionPerformed(evt);
             }
         });
-        panelInputs.add(txtNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 64, 22));
+        panelInputs.add(txtNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 64, -1));
 
         jLabel2.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Fecha");
-        panelInputs.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        panelInputs.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
 
         try {
             ftxtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -202,25 +206,26 @@ public class PanelPartidas extends javax.swing.JPanel {
                 ftxtFechaActionPerformed(evt);
             }
         });
-        panelInputs.add(ftxtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 70, 22));
+        panelInputs.add(ftxtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 80, 30));
 
         lblCantidad.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         lblCantidad.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblCantidad.setText("Cantidad");
-        panelInputs.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
+        lblCantidad.setText("Cantidad: $");
+        panelInputs.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, -1));
 
+        txtCantidad.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         txtCantidad.setPreferredSize(new java.awt.Dimension(100, 28));
-        panelInputs.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 64, 22));
+        panelInputs.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 80, 70, 30));
 
         jLabel3.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Tipo");
-        panelInputs.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
+        panelInputs.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, -1, -1));
 
         cmbTipo.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apertura", "Normal", "Cierre" }));
         cmbTipo.setMinimumSize(new java.awt.Dimension(150, 28));
-        panelInputs.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 150, 28));
+        panelInputs.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 150, 28));
 
         cmb_Cuentas.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         cmb_Cuentas.setPreferredSize(new java.awt.Dimension(250, 28));
@@ -239,10 +244,10 @@ public class PanelPartidas extends javax.swing.JPanel {
                 cmb_CuentasActionPerformed(evt);
             }
         });
-        panelInputs.add(cmb_Cuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 190, 24));
+        panelInputs.add(cmb_Cuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 190, 24));
 
-        btnDebe.setBackground(new java.awt.Color(99, 156, 84));
-        btnDebe.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnDebe.setBackground(new java.awt.Color(0, 0, 153));
+        btnDebe.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
         btnDebe.setForeground(new java.awt.Color(255, 255, 255));
         btnDebe.setText("Debe");
         btnDebe.setBorderPainted(false);
@@ -252,10 +257,10 @@ public class PanelPartidas extends javax.swing.JPanel {
                 btnDebeActionPerformed(evt);
             }
         });
-        panelInputs.add(btnDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 72, 25));
+        panelInputs.add(btnDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, 80, 30));
 
-        btnHaber.setBackground(new java.awt.Color(99, 156, 84));
-        btnHaber.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnHaber.setBackground(new java.awt.Color(0, 0, 153));
+        btnHaber.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
         btnHaber.setForeground(new java.awt.Color(255, 255, 255));
         btnHaber.setText("Haber");
         btnHaber.setBorderPainted(false);
@@ -265,18 +270,24 @@ public class PanelPartidas extends javax.swing.JPanel {
                 btnHaberActionPerformed(evt);
             }
         });
-        panelInputs.add(btnHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 72, 25));
+        panelInputs.add(btnHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 120, 80, 30));
 
         jLabel5.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Cuenta");
-        panelInputs.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        panelInputs.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel4.setText("Estado");
-        panelInputs.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, -1, -1));
+        panelInputs.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registrado", "Aprobado", "Anulado" }));
-        panelInputs.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 130, 30));
+        panelInputs.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 150, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel6.setText("Concepto:");
+        panelInputs.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
+        panelInputs.add(txtConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 610, -1));
 
         tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -291,35 +302,41 @@ public class PanelPartidas extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblCuentas);
 
-        panelInputs.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 740, 320));
+        panelInputs.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 850, 390));
 
-        jLabel6.setText("Concepto:");
-        panelInputs.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-        panelInputs.add(txtConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 670, -1));
-
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblTotalDebe.setText("Total debe:");
-        jPanel2.add(lblTotalDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, 20));
-
-        lblDebe.setText("DEBE");
-        jPanel2.add(lblDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
-
-        lblTotalHaber.setText("Total haber:");
-        jPanel2.add(lblTotalHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, -1));
-
-        lblHaber.setText("HABER");
-        jPanel2.add(lblHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, -1, -1));
-
+        btnGuardar.setBackground(new java.awt.Color(0, 102, 102));
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, -1, -1));
+        panelInputs.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 600, 120, 30));
 
-        panelInputs.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 750, 130));
+        lblHaber.setText("HABER");
+        panelInputs.add(lblHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, -1, -1));
+
+        lblTotalHaber.setText("Total haber:");
+        panelInputs.add(lblTotalHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 600, -1, -1));
+
+        lblDebe.setText("DEBE");
+        panelInputs.add(lblDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, -1, -1));
+
+        lblTotalDebe.setText("Total debe:");
+        panelInputs.add(lblTotalDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 600, -1, 20));
+
+        btnLimpiar.setBackground(new java.awt.Color(0, 0, 153));
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        panelInputs.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 600, 80, 30));
 
         add(panelInputs, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -542,11 +559,78 @@ public class PanelPartidas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+    limpiarFormulario();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
+    
+    
+    // mejora de interfaz
+    private void estiloTabla() {
+
+        tblCuentas.setDefaultRenderer(Object.class,
+                new javax.swing.table.DefaultTableCellRenderer() {
+
+            @Override
+            public java.awt.Component getTableCellRendererComponent(
+                    javax.swing.JTable table,
+                    Object value,
+                    boolean isSelected,
+                    boolean hasFocus,
+                    int row,
+                    int column) {
+
+                java.awt.Component c
+                        = super.getTableCellRendererComponent(
+                                table, value, isSelected, hasFocus, row, column);
+
+                if (!isSelected) {
+                    if (row % 2 == 0) {
+                        c.setBackground(new java.awt.Color(232, 242, 252));
+                    } else {
+                        c.setBackground(java.awt.Color.WHITE);
+                    }
+                }
+
+                return c;
+            }
+        });
+    }
+
+    
+    
+    private void limpiarFormulario() {
+
+        // Limpiar campos
+        txtNumeroAsiento.setText("");
+        txtCantidad.setText("");
+        txtConcepto.setText("");
+
+        // Fecha actual
+        ftxtFecha.setText(fechaFormateada);
+
+        // Reiniciar combos
+        cmbTipo.setSelectedIndex(0);
+        cmbEstado.setSelectedIndex(0);
+
+        if (cmb_Cuentas.getItemCount() > 0) {
+            cmb_Cuentas.setSelectedIndex(0);
+        }
+
+        // Limpiar lista temporal
+        listaTemporalPartidas.clear();
+
+        // Limpiar tabla
+        actualizarTabla();
+
+        // Reiniciar totales
+        recalcularTotales();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDebe;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnHaber;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JComboBox<String> cmb_Cuentas;
@@ -558,7 +642,6 @@ public class PanelPartidas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCantidad;
