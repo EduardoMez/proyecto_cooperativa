@@ -1,16 +1,125 @@
-
 package forms;
+
+import Clases.Balanza;
+import Clases.BalanzaDAO;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luisc
  */
 public class PanelBalanza extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelPartidas
-     */
+private DefaultTableModel modelo;
+    private final BalanzaDAO balanzaDAO;
+    
     public PanelBalanza() {
         initComponents();
+        initComponents();
+        balanzaDAO = new BalanzaDAO();
+        configurarTabla();
+
+    }
+
+
+
+    private void configurarTabla() {
+
+        modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Evita modificaciones manuales en la balanza
+            }
+        };
+
+        // Columnas oficiales de una Balanza de Comprobación
+        modelo.addColumn("Código");
+        modelo.addColumn("Cuenta contable");
+        modelo.addColumn("Saldo Inicial");
+        modelo.addColumn("Cargos (Debe)");
+        modelo.addColumn("Abonos (Haber)");
+        modelo.addColumn("Saldo Final");
+
+        tblBalanza.setModel(modelo);
+        tblBalanza.setRowHeight(30);
+        tblBalanza.getTableHeader().setFont(
+                new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13)
+        );
+    }
+    
+    private void cargarBalanza() {
+        String txtInicio = ftxtFechaInicio.getText().trim();
+        String txtFin = ftxtFechaFin.getText().trim();
+
+        // Validar que los campos de fecha no queden vacíos según la máscara ##/##/####
+        if (txtInicio.equals("//") || txtFin.equals("//")) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese ambas fechas para la consulta.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // Convertidores de formato de fecha (De la interfaz DD/MM/YYYY a Base de datos YYYY-MM-DD)
+            SimpleDateFormat formatoVista = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatoSQL = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date dateInicio = formatoVista.parse(txtInicio);
+            Date dateFin = formatoVista.parse(txtFin);
+
+            String fechaInicioSQL = formatoSQL.format(dateInicio);
+            String fechaFinSQL = formatoSQL.format(dateFin);
+
+            // Leer estado del JComboBox de filtros
+            // Posición 0: "Mostrar todas las cuentas."
+            // Posición 1: "Mostrar cuentas con saldo diferente a 0."
+            boolean soloConSaldo = jComboBox1.getSelectedIndex() == 1;
+
+            // Consultar datos al DAO
+            List<Balanza> datos = balanzaDAO.generarBalanza(fechaInicioSQL, fechaFinSQL, soloConSaldo);
+
+            // Limpiar filas anteriores de la tabla
+            modelo.setRowCount(0);
+
+            // Variables para acumular sumas iguales e inspección de partida doble al final de la vista
+            BigDecimal totalSInicial = BigDecimal.ZERO;
+            BigDecimal totalCargos = BigDecimal.ZERO;
+            BigDecimal totalAbonos = BigDecimal.ZERO;
+            BigDecimal totalSFinal = BigDecimal.ZERO;
+
+            for (Balanza b : datos) {
+                modelo.addRow(new Object[]{
+                    b.getCodigo(),
+                    b.getNombreCuenta(),
+                    "$" + b.getSaldoInicial(),
+                    "$" + b.getCargos(),
+                    "$" + b.getAbonos(),
+                    "$" + b.getSaldoFinal()
+                });
+
+                totalSInicial = totalSInicial.add(b.getSaldoInicial());
+                totalCargos = totalCargos.add(b.getCargos());
+                totalAbonos = totalAbonos.add(b.getAbonos());
+                totalSFinal = totalSFinal.add(b.getSaldoFinal());
+            }
+
+            // Fila de totales para verificar partida doble
+            modelo.addRow(new Object[]{
+                "---",
+                "TOTALES GENERALES",
+                "$" + totalSInicial,
+                "$" + totalCargos,
+                "$" + totalAbonos,
+                "$" + totalSFinal
+            });
+
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Formato de fecha inválido. Utilice el formato: DD/MM/AAAA", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -25,6 +134,16 @@ public class PanelBalanza extends javax.swing.JPanel {
         panelTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        PanelCuerpo = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        ftxtFechaInicio = new javax.swing.JFormattedTextField();
+        ftxtFechaFin = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        btnBuscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblBalanza = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(1270, 100));
@@ -47,12 +166,102 @@ public class PanelBalanza extends javax.swing.JPanel {
         panelTitulo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 360, 5));
 
         add(panelTitulo, java.awt.BorderLayout.NORTH);
+
+        PanelCuerpo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        try {
+            ftxtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtFechaInicio.setPreferredSize(new java.awt.Dimension(120, 28));
+        ftxtFechaInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftxtFechaInicioActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ftxtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 90, 30));
+
+        try {
+            ftxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtFechaFin.setPreferredSize(new java.awt.Dimension(120, 28));
+        ftxtFechaFin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftxtFechaFinActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ftxtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 90, 30));
+
+        jLabel4.setText("Fecha Inicio:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+
+        jLabel3.setText("Fecha Fin:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mostrar todas las cuentas.", "Mostrar cuentas con saldo diferente a 0." }));
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 250, -1));
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, -1, -1));
+
+        PanelCuerpo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 110));
+
+        tblBalanza.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblBalanza);
+
+        PanelCuerpo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 880, 360));
+
+        add(PanelCuerpo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ftxtFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtFechaInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxtFechaInicioActionPerformed
+
+    private void ftxtFechaFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtFechaFinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxtFechaFinActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    
+        this.cargarBalanza();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelCuerpo;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JFormattedTextField ftxtFechaFin;
+    private javax.swing.JFormattedTextField ftxtFechaInicio;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelTitulo;
+    private javax.swing.JTable tblBalanza;
     // End of variables declaration//GEN-END:variables
 }
