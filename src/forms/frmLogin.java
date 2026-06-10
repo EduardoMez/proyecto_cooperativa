@@ -21,12 +21,21 @@ public class frmLogin extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmLogin() {
-         initComponents();
+        
+        setUndecorated(true);  
+        initComponents();
         ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/logoC.png"));
         Image imagen = icono.getImage();
-        Image imagenEscalada = imagen.getScaledInstance(290, 200, Image.SCALE_SMOOTH);
+        Image imagenEscalada = imagen.getScaledInstance(180, 140, Image.SCALE_SMOOTH);
         lblLogo.setIcon(new ImageIcon(imagenEscalada));
        setLocationRelativeTo(null);
+        setShape(new java.awt.geom.RoundRectangle2D.Double(
+            0, 0,
+            getWidth(),
+            getHeight(),
+            25, // ancho del arco
+            25  // alto del arco
+    ));
     }
 
     /**
@@ -45,17 +54,20 @@ public class frmLogin extends javax.swing.JFrame {
         pswContrasenia = new javax.swing.JPasswordField();
         btnAceptar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
+        lblcerrar = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setType(java.awt.Window.Type.POPUP);
+        setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 260, -1));
+
+        txtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 210, -1));
 
         lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         lblUsuario.setText("Usuario");
@@ -65,12 +77,13 @@ public class frmLogin extends javax.swing.JFrame {
         lblContrasenia.setText("Contraseña");
         jPanel1.add(lblContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 96, -1));
 
+        pswContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         pswContrasenia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pswContraseniaActionPerformed(evt);
             }
         });
-        jPanel1.add(pswContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 260, -1));
+        jPanel1.add(pswContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 210, -1));
 
         btnAceptar.setBackground(new java.awt.Color(59, 116, 231));
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -82,19 +95,27 @@ public class frmLogin extends javax.swing.JFrame {
                 btnAceptarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 161, 30));
+        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 161, 30));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo.setText("Iniciar Sesión");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 0, 360, 360));
+        lblcerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
+        lblcerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblcerrarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblcerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 20, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 290, 320));
 
         jPanel2.setBackground(new java.awt.Color(59, 116, 231));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 240, 160));
+        jPanel2.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 150, 130));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 360));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 320));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,6 +148,10 @@ public class frmLogin extends javax.swing.JFrame {
     private void pswContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswContraseniaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pswContraseniaActionPerformed
+
+    private void lblcerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcerrarMouseClicked
+          dispose();
+    }//GEN-LAST:event_lblcerrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -171,6 +196,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JLabel lblcerrar;
     private javax.swing.JPasswordField pswContrasenia;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

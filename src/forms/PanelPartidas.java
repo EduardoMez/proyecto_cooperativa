@@ -285,12 +285,12 @@ public class PanelPartidas extends javax.swing.JPanel {
                 txtNumeroAsientoActionPerformed(evt);
             }
         });
-        panelInputs.add(txtNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 64, -1));
+        panelInputs.add(txtNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 110, -1));
 
         jLabel2.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Fecha");
-        panelInputs.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
+        panelInputs.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
 
         try {
             ftxtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -303,26 +303,26 @@ public class PanelPartidas extends javax.swing.JPanel {
                 ftxtFechaActionPerformed(evt);
             }
         });
-        panelInputs.add(ftxtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 80, 30));
+        panelInputs.add(ftxtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 90, 30));
 
         lblCantidad.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         lblCantidad.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCantidad.setText("Cantidad: $");
-        panelInputs.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, -1));
+        panelInputs.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, -1, -1));
 
         txtCantidad.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         txtCantidad.setPreferredSize(new java.awt.Dimension(100, 28));
-        panelInputs.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 80, 70, 30));
+        panelInputs.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, 70, 30));
 
         jLabel3.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Tipo");
-        panelInputs.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, -1, -1));
+        panelInputs.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 30, -1, -1));
 
         cmbTipo.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apertura", "Normal", "Cierre" }));
         cmbTipo.setMinimumSize(new java.awt.Dimension(150, 28));
-        panelInputs.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 150, 28));
+        panelInputs.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 150, 28));
 
         cmb_Cuentas.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         cmb_Cuentas.setPreferredSize(new java.awt.Dimension(250, 28));
@@ -341,7 +341,7 @@ public class PanelPartidas extends javax.swing.JPanel {
                 cmb_CuentasActionPerformed(evt);
             }
         });
-        panelInputs.add(cmb_Cuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 190, 24));
+        panelInputs.add(cmb_Cuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 270, 24));
 
         btnDebe.setBackground(new java.awt.Color(0, 0, 153));
         btnDebe.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
@@ -354,7 +354,7 @@ public class PanelPartidas extends javax.swing.JPanel {
                 btnDebeActionPerformed(evt);
             }
         });
-        panelInputs.add(btnDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, 80, 30));
+        panelInputs.add(btnDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, 80, 30));
 
         btnHaber.setBackground(new java.awt.Color(0, 0, 153));
         btnHaber.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
@@ -367,7 +367,7 @@ public class PanelPartidas extends javax.swing.JPanel {
                 btnHaberActionPerformed(evt);
             }
         });
-        panelInputs.add(btnHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 120, 80, 30));
+        panelInputs.add(btnHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 130, 80, 30));
 
         jLabel5.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -376,10 +376,10 @@ public class PanelPartidas extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel4.setText("Estado");
-        panelInputs.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, -1, -1));
+        panelInputs.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 80, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registrado", "Aprobado", "Anulado" }));
-        panelInputs.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 150, 30));
+        panelInputs.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 150, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel6.setText("Concepto:");

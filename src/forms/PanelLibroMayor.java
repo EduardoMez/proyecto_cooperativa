@@ -117,7 +117,7 @@ public class PanelLibroMayor extends javax.swing.JPanel {
         panelContenido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Cuenta:");
-        panelContenido.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
+        panelContenido.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
 
         cmbCuenta.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         cmbCuenta.setPreferredSize(new java.awt.Dimension(250, 28));
@@ -136,7 +136,7 @@ public class PanelLibroMayor extends javax.swing.JPanel {
                 cmbCuentaActionPerformed(evt);
             }
         });
-        panelContenido.add(cmbCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 290, 24));
+        panelContenido.add(cmbCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 300, 24));
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -147,13 +147,13 @@ public class PanelLibroMayor extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelContenido.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 90, 30));
+        panelContenido.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 90, 30));
 
         jLabel3.setText("Fecha Fin:");
-        panelContenido.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, -1));
+        panelContenido.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
 
         jLabel4.setText("Fecha Inicio:");
-        panelContenido.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
+        panelContenido.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
 
         try {
             ftxtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -166,7 +166,7 @@ public class PanelLibroMayor extends javax.swing.JPanel {
                 ftxtFechaInicioActionPerformed(evt);
             }
         });
-        panelContenido.add(ftxtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 90, 30));
+        panelContenido.add(ftxtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 90, 30));
 
         try {
             ftxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -179,7 +179,7 @@ public class PanelLibroMayor extends javax.swing.JPanel {
                 ftxtFechaFinActionPerformed(evt);
             }
         });
-        panelContenido.add(ftxtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 90, 30));
+        panelContenido.add(ftxtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 90, 30));
 
         tblMayor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -194,7 +194,7 @@ public class PanelLibroMayor extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblMayor);
 
-        panelContenido.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 880, 380));
+        panelContenido.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 880, 380));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 153));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -205,7 +205,7 @@ public class PanelLibroMayor extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        panelContenido.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 90, 30));
+        panelContenido.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 90, 30));
 
         add(panelContenido, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -254,8 +254,8 @@ public class PanelLibroMayor extends javax.swing.JPanel {
                 sdf.parse(ftxtFechaFin.getText());
         java.sql.Date fechaInicio =
                 new java.sql.Date(inicio.getTime());
-        java.sql.Date fechaFin =
-                new java.sql.Date(fin.getTime());
+        java.sql.Date fechaFin =new java.sql.Date(fin.getTime());
+        
         List<LibroMayor> lista =dao.listarLibroMayor(cuenta.getId(),fechaInicio,fechaFin,con);
 
         llenarTabla(lista);

@@ -142,6 +142,7 @@ private DefaultTableModel modelo;
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         btnBuscar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBalanza = new javax.swing.JTable();
 
@@ -167,8 +168,10 @@ private DefaultTableModel modelo;
 
         add(panelTitulo, java.awt.BorderLayout.NORTH);
 
+        PanelCuerpo.setBackground(new java.awt.Color(255, 255, 255));
         PanelCuerpo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         try {
@@ -182,7 +185,7 @@ private DefaultTableModel modelo;
                 ftxtFechaInicioActionPerformed(evt);
             }
         });
-        jPanel2.add(ftxtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 90, 30));
+        jPanel2.add(ftxtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 90, 30));
 
         try {
             ftxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -195,26 +198,36 @@ private DefaultTableModel modelo;
                 ftxtFechaFinActionPerformed(evt);
             }
         });
-        jPanel2.add(ftxtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 90, 30));
+        jPanel2.add(ftxtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 90, 30));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel4.setText("Fecha Inicio:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
-        jLabel3.setText("Fecha Fin:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel3.setText("Seleccione:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
 
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mostrar todas las cuentas.", "Mostrar cuentas con saldo diferente a 0." }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 250, -1));
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 250, -1));
 
+        btnBuscar.setBackground(new java.awt.Color(0, 0, 153));
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, -1, -1));
+        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 100, 30));
 
-        PanelCuerpo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 110));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel5.setText("Fecha Fin:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+
+        PanelCuerpo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 110));
 
         tblBalanza.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,7 +242,7 @@ private DefaultTableModel modelo;
         ));
         jScrollPane1.setViewportView(tblBalanza);
 
-        PanelCuerpo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 880, 360));
+        PanelCuerpo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 880, 360));
 
         add(PanelCuerpo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -258,6 +271,7 @@ private DefaultTableModel modelo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
