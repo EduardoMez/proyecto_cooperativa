@@ -60,6 +60,7 @@ public class Principal extends javax.swing.JFrame {
         panelMenu = new javax.swing.JPanel();
         btnMayor = new javax.swing.JButton();
         btnDiario = new javax.swing.JButton();
+        btnVerPartidas = new javax.swing.JButton();
         btnCierre = new javax.swing.JButton();
         btnBalanza = new javax.swing.JButton();
         btnEstados = new javax.swing.JButton();
@@ -91,7 +92,7 @@ public class Principal extends javax.swing.JFrame {
                 btnMayorActionPerformed(evt);
             }
         });
-        panelMenu.add(btnMayor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 220, 45));
+        panelMenu.add(btnMayor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 220, 45));
 
         btnDiario.setBackground(new java.awt.Color(0, 204, 102));
         btnDiario.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
@@ -109,7 +110,25 @@ public class Principal extends javax.swing.JFrame {
                 btnDiarioActionPerformed(evt);
             }
         });
-        panelMenu.add(btnDiario, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 260, 220, 45));
+        panelMenu.add(btnDiario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 220, 45));
+
+        btnVerPartidas.setBackground(new java.awt.Color(0, 204, 102));
+        btnVerPartidas.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
+        btnVerPartidas.setForeground(new java.awt.Color(255, 255, 255));
+        btnVerPartidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/notas (1).png"))); // NOI18N
+        btnVerPartidas.setText("Ver Partidas");
+        btnVerPartidas.setBorderPainted(false);
+        btnVerPartidas.setContentAreaFilled(false);
+        btnVerPartidas.setFocusPainted(false);
+        btnVerPartidas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnVerPartidas.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnVerPartidas.setIconTextGap(15);
+        btnVerPartidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerPartidasActionPerformed(evt);
+            }
+        });
+        panelMenu.add(btnVerPartidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 220, 45));
 
         btnCierre.setBackground(new java.awt.Color(0, 204, 102));
         btnCierre.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
@@ -127,7 +146,7 @@ public class Principal extends javax.swing.JFrame {
                 btnCierreActionPerformed(evt);
             }
         });
-        panelMenu.add(btnCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 500, 200, 45));
+        panelMenu.add(btnCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 200, 45));
 
         btnBalanza.setBackground(new java.awt.Color(0, 204, 102));
         btnBalanza.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
@@ -145,7 +164,7 @@ public class Principal extends javax.swing.JFrame {
                 btnBalanzaActionPerformed(evt);
             }
         });
-        panelMenu.add(btnBalanza, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 220, 45));
+        panelMenu.add(btnBalanza, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 220, 45));
 
         btnEstados.setBackground(new java.awt.Color(0, 204, 102));
         btnEstados.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
@@ -164,7 +183,7 @@ public class Principal extends javax.swing.JFrame {
                 btnEstadosActionPerformed(evt);
             }
         });
-        panelMenu.add(btnEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 220, 45));
+        panelMenu.add(btnEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 220, 45));
 
         btnCuentas.setBackground(new java.awt.Color(0, 204, 102));
         btnCuentas.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
@@ -235,6 +254,10 @@ public class Principal extends javax.swing.JFrame {
          mostrarPanel(new PanelEstados());
     }//GEN-LAST:event_btnEstadosActionPerformed
 
+    private void btnVerPartidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPartidasActionPerformed
+     mostrarPanel(new PanelVerPartidas());
+    }//GEN-LAST:event_btnVerPartidasActionPerformed
+
  
     
     /**
@@ -280,6 +303,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnDiario;
     private javax.swing.JButton btnEstados;
     private javax.swing.JButton btnMayor;
+    private javax.swing.JButton btnVerPartidas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMenu;
     private javax.swing.JPanel panelMenu;

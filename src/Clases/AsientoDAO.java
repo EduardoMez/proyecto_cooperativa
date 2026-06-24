@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AsientoDAO {
     
@@ -80,6 +82,61 @@ public class AsientoDAO {
             e.printStackTrace();
         }
         return 1; // Si está vacía o falla, empieza en 1
+    }
+    
+    /**
+     * Busca asientos dentro de un rango de fechas.
+     */
+    public List<Asiento> buscarPorFechas(java.util.Date fechaInicio, java.util.Date fechaFin) {
+        List<Asiento> lista = new ArrayList<>();
+        String sql = "SELECT id, numero, fecha, concepto, periodo_id, tipo, estado, creado_por FROM asientos "
+                   + "WHERE fecha BETWEEN ? AND ? ORDER BY fecha ASC, numero ASC";
+        
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setDate(1, new java.sql.Date(fechaInicio.getTime()));
+            ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Asiento a = new Asiento();
+                    // Usamos el setPeriodo_id temporalmente para guardar la PK real 'id' de la tabla,
+                    // la cual necesitaremos obligatoriamente para buscar los renglones (Partidas)
+                    a.setPeriodo_id(rs.getInt("id")); 
+                    a.setNumero(rs.getString("numero"));
+                    a.setFecha(rs.getDate("fecha"));
+                    a.setConcepto(rs.getString("concepto"));
+                    a.setTipo(rs.getString("tipo"));
+                    a.setEstado(rs.getString("estado"));
+                    a.setCreado_por(rs.getInt("creado_por"));
+                    lista.add(a);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar asientos por fecha: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    /**
+     * Modifica únicamente el estado de un asiento específico usando su número correlativo.
+     */
+    public boolean actualizarEstado(String numeroAsiento, String nuevoEstado) {
+        String sql = "UPDATE asientos SET estado = ? WHERE numero = ?";
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, nuevoEstado);
+            ps.setString(2, numeroAsiento);
+            
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el estado del asiento: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
     
 }
