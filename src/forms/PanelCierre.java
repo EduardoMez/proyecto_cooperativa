@@ -95,18 +95,37 @@ public class PanelCierre extends javax.swing.JPanel {
         cmbPeriodos = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         txtPeriodoNuevo = new javax.swing.JTextField();
+        panelTitulo = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel1.setText("Periodo Actual");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel2.setText("Fecha de cierre");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, -1));
+        add(txtFechaCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 128, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel3.setText("Generado por");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, -1, -1));
+        add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 211, -1));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel4.setText("Observaciones");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
 
         txtAObservaciones.setColumns(20);
         txtAObservaciones.setRows(5);
         jScrollPane1.setViewportView(txtAObservaciones);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 476, 46));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(797, 85, -1, -1));
 
         tblCierre.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,96 +140,53 @@ public class PanelCierre extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tblCierre);
 
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 870, 300));
+
+        btnCrearCierre.setBackground(new java.awt.Color(0, 0, 153));
+        btnCrearCierre.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnCrearCierre.setForeground(new java.awt.Color(255, 255, 255));
         btnCrearCierre.setText("Crear Cierre");
         btnCrearCierre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearCierreActionPerformed(evt);
             }
         });
+        add(btnCrearCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 220, 120, 30));
 
+        btnGuardarCierre.setBackground(new java.awt.Color(0, 0, 153));
+        btnGuardarCierre.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnGuardarCierre.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardarCierre.setText("Guardar Cierre");
         btnGuardarCierre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarCierreActionPerformed(evt);
             }
         });
+        add(btnGuardarCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 610, -1, 40));
 
+        add(cmbPeriodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 151, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel6.setText("Nombre del nuevo periodo");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        add(txtPeriodoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 730, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtUsuario))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPeriodoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(495, 495, 495)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCrearCierre))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnGuardarCierre)
-                                .addGap(35, 35, 35)))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(txtFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtPeriodoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btnCrearCierre)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnGuardarCierre)
-                .addContainerGap())
-        );
+        panelTitulo.setBackground(new java.awt.Color(255, 255, 255));
+        panelTitulo.setPreferredSize(new java.awt.Dimension(1270, 80));
+        panelTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel7.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setText("Cierre");
+        panelTitulo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 340, 35));
+
+        jPanel1.setBackground(new java.awt.Color(59, 116, 231));
+        jPanel1.setPreferredSize(new java.awt.Dimension(270, 5));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelTitulo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 360, 5));
+
+        add(panelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearCierreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCierreActionPerformed
@@ -312,8 +288,11 @@ public class PanelCierre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel panelTitulo;
     private javax.swing.JTable tblCierre;
     private javax.swing.JTextArea txtAObservaciones;
     private javax.swing.JTextField txtFechaCierre;

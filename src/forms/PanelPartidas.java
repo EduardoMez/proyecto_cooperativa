@@ -293,7 +293,7 @@ public class PanelPartidas extends javax.swing.JPanel {
                 txtNumeroAsientoActionPerformed(evt);
             }
         });
-        panelInputs.add(txtNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 110, -1));
+        panelInputs.add(txtNumeroAsiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 160, -1));
 
         jLabel2.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
