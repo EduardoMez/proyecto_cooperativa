@@ -91,7 +91,7 @@ public class PanelLibroMayor extends javax.swing.JPanel {
         tblMayor = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(204, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1270, 100));
         setRequestFocusEnabled(false);
         setLayout(new java.awt.BorderLayout());
@@ -207,7 +207,7 @@ public class PanelLibroMayor extends javax.swing.JPanel {
         });
         panelContenido.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 90, 30));
 
-        add(panelContenido, java.awt.BorderLayout.CENTER);
+        add(panelContenido, java.awt.BorderLayout.LINE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     

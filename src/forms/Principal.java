@@ -1,4 +1,5 @@
 package forms;
+import Clases.Sesion;
 import javax.swing.JPanel;
 public class Principal extends javax.swing.JFrame {
     private boolean menuAbierto = true;
@@ -11,6 +12,7 @@ public class Principal extends javax.swing.JFrame {
         mostrarPanel(new PanelDashboard());
         this.setSize(1366, 768);
         setLocationRelativeTo(null);
+       
         // Cursor de manita al pasar sobre el label
        lblMenu.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
      
@@ -25,7 +27,7 @@ public class Principal extends javax.swing.JFrame {
         panelMenu.setPreferredSize(new java.awt.Dimension(anchoMenu, panelMenu.getHeight()));
 
         // 2. Actualizamos los textos de los botones
-        btnDashboard.setText(menuAbierto ? "Dashboard" : "");
+       
         btnCuentas.setText(menuAbierto ? "Cuentas" : "");
         btnDiario.setText(menuAbierto ? "Partidas Diarias" : "");
         btnMayor.setText(menuAbierto ? "Libro Mayor" : "");
@@ -57,7 +59,6 @@ public class Principal extends javax.swing.JFrame {
 
         panelMenu = new javax.swing.JPanel();
         btnMayor = new javax.swing.JButton();
-        btnDashboard = new javax.swing.JButton();
         btnDiario = new javax.swing.JButton();
         btnCierre = new javax.swing.JButton();
         btnBalanza = new javax.swing.JButton();
@@ -75,7 +76,7 @@ public class Principal extends javax.swing.JFrame {
         panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnMayor.setBackground(new java.awt.Color(0, 204, 102));
-        btnMayor.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnMayor.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
         btnMayor.setForeground(new java.awt.Color(255, 255, 255));
         btnMayor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/libro-abierto.png"))); // NOI18N
         btnMayor.setText("Libro Mayor");
@@ -92,27 +93,8 @@ public class Principal extends javax.swing.JFrame {
         });
         panelMenu.add(btnMayor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 220, 45));
 
-        btnDashboard.setBackground(new java.awt.Color(59, 116, 231));
-        btnDashboard.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
-        btnDashboard.setForeground(new java.awt.Color(255, 255, 255));
-        btnDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/casa.png"))); // NOI18N
-        btnDashboard.setText("Dashboard");
-        btnDashboard.setBorderPainted(false);
-        btnDashboard.setContentAreaFilled(false);
-        btnDashboard.setFocusPainted(false);
-        btnDashboard.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnDashboard.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnDashboard.setIconTextGap(15);
-        btnDashboard.setOpaque(true);
-        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDashboardActionPerformed(evt);
-            }
-        });
-        panelMenu.add(btnDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 220, 45));
-
         btnDiario.setBackground(new java.awt.Color(0, 204, 102));
-        btnDiario.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnDiario.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
         btnDiario.setForeground(new java.awt.Color(255, 255, 255));
         btnDiario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/notas (1).png"))); // NOI18N
         btnDiario.setText("Partidas Diarias");
@@ -130,7 +112,7 @@ public class Principal extends javax.swing.JFrame {
         panelMenu.add(btnDiario, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 260, 220, 45));
 
         btnCierre.setBackground(new java.awt.Color(0, 204, 102));
-        btnCierre.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnCierre.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
         btnCierre.setForeground(new java.awt.Color(255, 255, 255));
         btnCierre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cerrar-sesion.png"))); // NOI18N
         btnCierre.setText("Cierre");
@@ -148,7 +130,7 @@ public class Principal extends javax.swing.JFrame {
         panelMenu.add(btnCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 500, 200, 45));
 
         btnBalanza.setBackground(new java.awt.Color(0, 204, 102));
-        btnBalanza.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnBalanza.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
         btnBalanza.setForeground(new java.awt.Color(255, 255, 255));
         btnBalanza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/balanza.png"))); // NOI18N
         btnBalanza.setText("Bal.Comprobacion");
@@ -166,7 +148,7 @@ public class Principal extends javax.swing.JFrame {
         panelMenu.add(btnBalanza, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 220, 45));
 
         btnEstados.setBackground(new java.awt.Color(0, 204, 102));
-        btnEstados.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnEstados.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
         btnEstados.setForeground(new java.awt.Color(255, 255, 255));
         btnEstados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/barra-grafica.png"))); // NOI18N
         btnEstados.setText("Estados financieros ");
@@ -185,7 +167,7 @@ public class Principal extends javax.swing.JFrame {
         panelMenu.add(btnEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 220, 45));
 
         btnCuentas.setBackground(new java.awt.Color(0, 204, 102));
-        btnCuentas.setFont(new java.awt.Font("Poppins", 0, 13)); // NOI18N
+        btnCuentas.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
         btnCuentas.setForeground(new java.awt.Color(255, 255, 255));
         btnCuentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/banco.png"))); // NOI18N
         btnCuentas.setText("Cuentas");
@@ -200,7 +182,7 @@ public class Principal extends javax.swing.JFrame {
         });
         panelMenu.add(btnCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 220, 45));
 
-        lblMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblMenu.setForeground(new java.awt.Color(255, 255, 255));
         lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/lista.png"))); // NOI18N
         lblMenu.setText("    Menu");
@@ -209,7 +191,7 @@ public class Principal extends javax.swing.JFrame {
                 lblMenuMouseClicked(evt);
             }
         });
-        panelMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 80, 90, 40));
+        panelMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 140, 90, 40));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -232,10 +214,6 @@ public class Principal extends javax.swing.JFrame {
     private void btnMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMayorActionPerformed
        mostrarPanel(new PanelLibroMayor());
     }//GEN-LAST:event_btnMayorActionPerformed
-
-    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
-        mostrarPanel(new PanelDashboard());
-    }//GEN-LAST:event_btnDashboardActionPerformed
 
     private void btnDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiarioActionPerformed
       mostrarPanel(new PanelPartidas());
@@ -299,7 +277,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnBalanza;
     private javax.swing.JButton btnCierre;
     private javax.swing.JButton btnCuentas;
-    private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnDiario;
     private javax.swing.JButton btnEstados;
     private javax.swing.JButton btnMayor;

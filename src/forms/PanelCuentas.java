@@ -100,8 +100,6 @@ public class PanelCuentas extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCuentas = new javax.swing.JTable();
         controles = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         btnGasto = new javax.swing.JRadioButton();
         rbtnActivo = new javax.swing.JRadioButton();
         rbtnPasivo = new javax.swing.JRadioButton();
@@ -152,14 +150,6 @@ public class PanelCuentas extends javax.swing.JPanel {
         controles.setPreferredSize(new java.awt.Dimension(469, 34));
         controles.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Buscar:");
-        controles.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jTextField1.setPreferredSize(new java.awt.Dimension(64, 22));
-        controles.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 260, -1));
-
         gtupo.add(btnGasto);
         btnGasto.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnGasto.setText("Gasto");
@@ -168,7 +158,7 @@ public class PanelCuentas extends javax.swing.JPanel {
                 btnGastoActionPerformed(evt);
             }
         });
-        controles.add(btnGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, -1, -1));
+        controles.add(btnGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
 
         gtupo.add(rbtnActivo);
         rbtnActivo.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -178,7 +168,7 @@ public class PanelCuentas extends javax.swing.JPanel {
                 rbtnActivoActionPerformed(evt);
             }
         });
-        controles.add(rbtnActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
+        controles.add(rbtnActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         gtupo.add(rbtnPasivo);
         rbtnPasivo.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -188,7 +178,7 @@ public class PanelCuentas extends javax.swing.JPanel {
                 rbtnPasivoActionPerformed(evt);
             }
         });
-        controles.add(rbtnPasivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
+        controles.add(rbtnPasivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
 
         gtupo.add(rbtnPatrimonio);
         rbtnPatrimonio.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -198,7 +188,7 @@ public class PanelCuentas extends javax.swing.JPanel {
                 rbtnPatrimonioActionPerformed(evt);
             }
         });
-        controles.add(rbtnPatrimonio, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, -1, -1));
+        controles.add(rbtnPatrimonio, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, -1));
 
         gtupo.add(rbtnIngreso);
         rbtnIngreso.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -208,7 +198,7 @@ public class PanelCuentas extends javax.swing.JPanel {
                 rbtnIngresoActionPerformed(evt);
             }
         });
-        controles.add(rbtnIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, -1, -1));
+        controles.add(rbtnIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, -1, -1));
 
         gtupo.add(jRadioButton1);
         jRadioButton1.setText("Todas");
@@ -217,7 +207,7 @@ public class PanelCuentas extends javax.swing.JPanel {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        controles.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, -1, -1));
+        controles.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, -1, -1));
 
         panelContenidoCuentas.add(controles, java.awt.BorderLayout.PAGE_START);
 
@@ -254,11 +244,9 @@ public class PanelCuentas extends javax.swing.JPanel {
     private javax.swing.JPanel controles;
     private javax.swing.ButtonGroup gtupo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panelContenidoCuentas;
     private javax.swing.JPanel panelTitulo;
     private javax.swing.JRadioButton rbtnActivo;

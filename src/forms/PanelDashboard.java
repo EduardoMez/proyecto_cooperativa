@@ -1,289 +1,120 @@
 
 package forms;
+
+import Clases.Sesion;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 public class PanelDashboard extends javax.swing.JPanel {
 
     public PanelDashboard() {
         initComponents();
+        lblUsuario.setText(
+                Sesion.getUsuarioActual().getNombre() + "!"
+        );
+
+        ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/Logo.jpeg"));
+        Image imagen = icono.getImage();
+        Image imagenEscalada = imagen.getScaledInstance(500, 350, Image.SCALE_SMOOTH);
+        lblLogo.setIcon(new ImageIcon(imagenEscalada));
+        
+       
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelCuerpo = new javax.swing.JPanel();
-        otro = new javax.swing.JPanel();
-        panelTarjetas = new javax.swing.JPanel();
-        tarjeta2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        tarjeta1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        tarjeta3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        tarjeta4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        tarjeta5 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        panelTitulo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
+        lblBienvenida1 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(0, 0));
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelCuerpo.setBackground(new java.awt.Color(255, 255, 255));
-        panelCuerpo.setLayout(new java.awt.BorderLayout());
+        lblLogo.setText(".");
+        add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, 480, 430));
 
-        otro.setBackground(new java.awt.Color(255, 255, 255));
-        otro.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 50, 20, 80));
-        otro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        otro.setPreferredSize(new java.awt.Dimension(6340, 169));
-        otro.setLayout(new java.awt.BorderLayout());
+        lblBienvenida1.setFont(new java.awt.Font("Segoe UI", 1, 50)); // NOI18N
+        lblBienvenida1.setText("¡Bienvenido,");
+        add(lblBienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 350, 50));
 
-        panelTarjetas.setBackground(new java.awt.Color(255, 255, 255));
-        panelTarjetas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        panelTarjetas.setLayout(new java.awt.GridLayout(1, 5, 10, 0));
-
-        tarjeta2.setBackground(new java.awt.Color(134, 100, 250));
-
-        jLabel3.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Total Pasivos");
-
-        jLabel11.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("$0.0");
-
-        javax.swing.GroupLayout tarjeta2Layout = new javax.swing.GroupLayout(tarjeta2);
-        tarjeta2.setLayout(tarjeta2Layout);
-        tarjeta2Layout.setHorizontalGroup(
-            tarjeta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta2Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(tarjeta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        tarjeta2Layout.setVerticalGroup(
-            tarjeta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                .addGap(11, 11, 11))
-        );
-
-        panelTarjetas.add(tarjeta2);
-
-        tarjeta1.setBackground(new java.awt.Color(25, 205, 197));
-        tarjeta1.setForeground(new java.awt.Color(25, 205, 197));
-
-        jLabel2.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Total Activos");
-
-        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("$0.0");
-
-        javax.swing.GroupLayout tarjeta1Layout = new javax.swing.GroupLayout(tarjeta1);
-        tarjeta1.setLayout(tarjeta1Layout);
-        tarjeta1Layout.setHorizontalGroup(
-            tarjeta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta1Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(tarjeta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        tarjeta1Layout.setVerticalGroup(
-            tarjeta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
-        );
-
-        panelTarjetas.add(tarjeta1);
-
-        tarjeta3.setBackground(new java.awt.Color(59, 116, 231));
-
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Capital");
-
-        jLabel8.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("$0.0");
-
-        javax.swing.GroupLayout tarjeta3Layout = new javax.swing.GroupLayout(tarjeta3);
-        tarjeta3.setLayout(tarjeta3Layout);
-        tarjeta3Layout.setHorizontalGroup(
-            tarjeta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta3Layout.createSequentialGroup()
-                .addGroup(tarjeta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tarjeta3Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel4))
-                    .addGroup(tarjeta3Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        tarjeta3Layout.setVerticalGroup(
-            tarjeta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                .addGap(11, 11, 11))
-        );
-
-        panelTarjetas.add(tarjeta3);
-
-        tarjeta4.setBackground(new java.awt.Color(46, 204, 113));
-        tarjeta4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 0)));
-        tarjeta4.setForeground(new java.awt.Color(46, 204, 113));
-
-        jLabel6.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Excedende del Periodo");
-
-        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("$0.0");
-
-        javax.swing.GroupLayout tarjeta4Layout = new javax.swing.GroupLayout(tarjeta4);
-        tarjeta4.setLayout(tarjeta4Layout);
-        tarjeta4Layout.setHorizontalGroup(
-            tarjeta4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(25, 25, 25))
-            .addGroup(tarjeta4Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        tarjeta4Layout.setVerticalGroup(
-            tarjeta4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                .addGap(11, 11, 11))
-        );
-
-        panelTarjetas.add(tarjeta4);
-
-        tarjeta5.setBackground(new java.awt.Color(52, 73, 94));
-        tarjeta5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
-
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Poppins", 1, 13)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Asientos Registrados");
-
-        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("0");
-
-        javax.swing.GroupLayout tarjeta5Layout = new javax.swing.GroupLayout(tarjeta5);
-        tarjeta5.setLayout(tarjeta5Layout);
-        tarjeta5Layout.setHorizontalGroup(
-            tarjeta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(tarjeta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tarjeta5Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(26, 26, 26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tarjeta5Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))))
-        );
-        tarjeta5Layout.setVerticalGroup(
-            tarjeta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tarjeta5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                .addGap(11, 11, 11))
-        );
-
-        panelTarjetas.add(tarjeta5);
-
-        otro.add(panelTarjetas, java.awt.BorderLayout.CENTER);
-
-        panelCuerpo.add(otro, java.awt.BorderLayout.NORTH);
-
-        add(panelCuerpo, java.awt.BorderLayout.CENTER);
-
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 30, 30, 30));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1270, 430));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Numero", "Fecha", "Concepto", "Debe", "Haber", "Tipo"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setFillsViewportHeight(true);
-        jTable1.setPreferredSize(new java.awt.Dimension(0, 0));
-        jScrollPane1.setViewportView(jTable1);
-
-        add(jScrollPane1, java.awt.BorderLayout.SOUTH);
-
-        panelTitulo.setBackground(new java.awt.Color(255, 255, 255));
-        panelTitulo.setPreferredSize(new java.awt.Dimension(1270, 80));
-        panelTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel1.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText(" Resumen del Período");
-        panelTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 270, 35));
+        lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        lblUsuario.setForeground(new java.awt.Color(243, 141, 22));
+        add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 570, 50));
 
         jPanel1.setBackground(new java.awt.Color(59, 116, 231));
         jPanel1.setPreferredSize(new java.awt.Dimension(270, 5));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelTitulo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 270, 5));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 205, 5));
 
-        add(panelTitulo, java.awt.BorderLayout.NORTH);
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Nos alegra tenerte de vuelta");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 290, 30));
+
+        jPanel2.setBackground(new java.awt.Color(230, 236, 247));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("de formar rapida y segura.");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 290, 30));
+
+        jLabel2.setForeground(new java.awt.Color(55, 71, 79));
+        jLabel2.setText("Cooperativa - Sistema de Gestión Contable");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 240, 30));
+
+        jLabel7.setForeground(new java.awt.Color(55, 71, 79));
+        jLabel7.setText("La información de tu cooperativa esta segura con nosotros");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 460, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/proteger.png"))); // NOI18N
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/simbolo-de-copyright.png"))); // NOI18N
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 680, 1040, 33));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Desde aquí puedes gestionar la información de tu cooperativa");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 450, 30));
+
+        jPanel3.setBackground(new java.awt.Color(230, 236, 247));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(55, 71, 79));
+        jLabel8.setText("de nuestra comunidad!");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 240, 30));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(55, 71, 79));
+        jLabel9.setText("¡Trabajamos juntos por el bienestar");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 240, 30));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/apreton-de-manos.png"))); // NOI18N
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 480, 360, 80));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("de formar rapida y segura.");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 290, 30));
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -291,25 +122,19 @@ public class PanelDashboard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JPanel otro;
-    private javax.swing.JPanel panelCuerpo;
-    private javax.swing.JPanel panelTarjetas;
-    private javax.swing.JPanel panelTitulo;
-    private javax.swing.JPanel tarjeta1;
-    private javax.swing.JPanel tarjeta2;
-    private javax.swing.JPanel tarjeta3;
-    private javax.swing.JPanel tarjeta4;
-    private javax.swing.JPanel tarjeta5;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblBienvenida1;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }
