@@ -1,10 +1,13 @@
 package Clases;
 
 import clases.Conexion;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PeriodoDAO {
 
@@ -28,4 +31,5 @@ public class PeriodoDAO {
         }
         return null; // Retorna null si no hay ningún periodo abierto configurado
     }
+    
 }

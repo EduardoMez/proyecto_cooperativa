@@ -65,4 +65,21 @@ public class AsientoDAO {
         }
         return id;
     }
+    
+    // Método para obtener el siguiente correlativo numérico de asiento
+    public int obtenerSiguienteCorrelativo() {
+        String sql = "SELECT COUNT(*) FROM asientos";
+        try (Connection con = Conexion.conectar(); 
+             PreparedStatement ps = con.prepareStatement(sql); 
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1) + 1; // Retorna el conteo total + 1
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al calcular correlativo de asientos: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return 1; // Si está vacía o falla, empieza en 1
+    }
+    
 }

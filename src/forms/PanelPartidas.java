@@ -44,8 +44,16 @@ public class PanelPartidas extends javax.swing.JPanel {
         this.llenarTabla();
         estiloTabla();
         this.recalcularTotales();
+        txtNumeroAsiento.setEditable(false);
+        this.generarNumeroAsientoAutomatico();
     }
 
+    private void generarNumeroAsientoAutomatico() {
+// Mostramos "PENDIENTE" porque el número real e idéntico al ID 
+        // lo asignará la base de datos de forma segura al presionar Guardar.
+        txtNumeroAsiento.setText("AUTOGENERABLE");
+    }
+    
     private void cargarCuentas() {
         CuentaDAO dao = new CuentaDAO();
         cmb_Cuentas.removeAllItems();
@@ -552,12 +560,12 @@ public class PanelPartidas extends javax.swing.JPanel {
             return;
         }
 
-        if (txtNumeroAsiento.getText().trim().isEmpty() || txtConcepto.getText().trim().isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Por favor complete el Número de Asiento y el Concepto.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (txtConcepto.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor complete el Concepto del asiento.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-// --- VALIDACIÓN DE PERIODO CONTABLE ---
+        // --- VALIDACIÓN DE PERIODO CONTABLE ---
         Clases.PeriodoDAO periodoDAO = new Clases.PeriodoDAO();
         Clases.Periodo periodoActivo = periodoDAO.obtenerPeriodoActivo();
 
@@ -568,9 +576,9 @@ public class PanelPartidas extends javax.swing.JPanel {
                     javax.swing.JOptionPane.ERROR_MESSAGE);
             return; // Detiene la ejecución para no insertar datos huérfanos sin periodo_id
         }
-// --------------------------------------
+        // --------------------------------------
 
-// 2. Validar principio de partida doble (cuadrante)
+        // 2. Validar principio de partida doble (cuadrante)
         double totalDebe = 0.0;
         double totalHaber = 0.0;
         for (Partida p : listaTemporalPartidas) {
@@ -578,13 +586,13 @@ public class PanelPartidas extends javax.swing.JPanel {
             totalHaber += p.getHaber();
         }
 
-// Usamos una pequeña tolerancia por cuestiones de precisión decimal de punto flotante
+        // Usamos una pequeña tolerancia por cuestiones de precisión decimal de punto flotante
         if (Math.abs(totalDebe - totalHaber) > 0.001) {
             javax.swing.JOptionPane.showMessageDialog(this, "El asiento no está cuadrado. El total del DEBE debe ser igual al HABER.", "Error Contable", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-// 3. Proceso de Guardado Transaccional
+        // 3. Proceso de Guardado Transaccional
         java.sql.Connection con = null;
         try {
             con = clases.Conexion.conectar();
@@ -596,7 +604,9 @@ public class PanelPartidas extends javax.swing.JPanel {
 
             // Creamos el objeto Asiento con los datos de los inputs
             Asiento asiento = new Asiento();
-            asiento.setNumero(txtNumeroAsiento.getText().trim());
+            
+            // Colocamos un valor transitorio, ya que abajo se sobreescribirá con el ID real de la BD
+            asiento.setNumero("PENDIENTE"); 
             asiento.setFecha(fecha); // Variable 'fecha' de tipo Date definida arriba de tu panel
             asiento.setConcepto(txtConcepto.getText().trim());
             asiento.setTipo(cmbTipo.getSelectedItem().toString());
@@ -616,6 +626,17 @@ public class PanelPartidas extends javax.swing.JPanel {
             // Guardamos el asiento y obtenemos su ID generado por la BD
             int idAsientoGenerado = asientoDAO.insertarAsiento(asiento, con);
 
+            // ====================================================================
+            // SINCRONIZACIÓN: IGUALAMOS EL CAMPO 'NUMERO' AL 'ID' AUTOGENERADO
+            // ====================================================================
+            String sqlUpdateNumero = "UPDATE asientos SET numero = ? WHERE id = ?";
+            try (java.sql.PreparedStatement psUpdate = con.prepareStatement(sqlUpdateNumero)) {
+                psUpdate.setString(1, String.valueOf(idAsientoGenerado));
+                psUpdate.setInt(2, idAsientoGenerado);
+                psUpdate.executeUpdate();
+            }
+            // ====================================================================
+
             // Recorremos la lista temporal e insertamos las partidas vinculadas al ID del asiento
             for (Partida partida : listaTemporalPartidas) {
                 partida.setAsiento_id(idAsientoGenerado); // Seteamos el ID real foráneo
@@ -627,15 +648,18 @@ public class PanelPartidas extends javax.swing.JPanel {
 
             // Si todo salió bien hasta aquí sin excepciones, confirmamos los datos en la BD
             con.commit();
-            javax.swing.JOptionPane.showMessageDialog(this, "Asiento Diario y Partidas guardados exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Asiento Diario y Partidas guardados exitosamente con el N# Asiento: " + idAsientoGenerado, "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-            // 4. Limpieza de la interfaz gráfica para el próximo asiento
+            // 4. Limpieza de la interfaz gráfica y REFRESCAMIENTO DEL CORRELATIVO
             listaTemporalPartidas.clear();
             actualizarTabla();
             recalcularTotales();
-            txtNumeroAsiento.setText("");
+            
             txtConcepto.setText("");
             txtCantidad.setText("");
+            
+            // Re-calculamos el número de asiento automático para la siguiente entrada
+            generarNumeroAsientoAutomatico();
 
         } catch (Exception e) {
             // Si algo falla, revertimos absolutamente todo para no dejar datos corruptos
@@ -657,6 +681,7 @@ public class PanelPartidas extends javax.swing.JPanel {
                     ex.printStackTrace();
                 }
             }
+        
         }
 
         // TODO add your handling code here:

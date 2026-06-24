@@ -220,7 +220,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDiarioActionPerformed
 
     private void btnCierreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCierreActionPerformed
-       // mostrarPanel(new panelCierre());
+        mostrarPanel(new PanelCierre());
     }//GEN-LAST:event_btnCierreActionPerformed
 
     private void btnBalanzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanzaActionPerformed
